@@ -1,0 +1,19 @@
+# typescript 泛型
+
+
+## 在泛型中使用类类型 (Using Class Types in Generics)
+
+在使用泛型创建工厂时，通过它们的构造器函数来引用类型是必须的。例如：
+```typescript
+function create<T>(c: {new(): T; }): T {
+    return new c();
+}
+```
+一般的泛型，参数声明：`(c: T)`, 这时 *c* 是 *T* 的实例。
+使用泛型创建工厂，参数声明：`(c: {new(): T; })`,  这时 *c* 是 *T* 的引用（T类型的引用）。
+
+## 参考
+
+[官网generics introduction][1]
+
+[1]:http://www.typescriptlang.org/docs/handbook/generics.html "官网generics introduction"

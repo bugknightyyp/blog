@@ -1,0 +1,25 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "my blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bugknightyyp/blog.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "bugknightyyp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bugknightyyp/blog/issues"
+  },
+  "homepage": "https://github.com/bugknightyyp/blog#readme",
+  "dependencies": {
+    "koa": "^2.0.0"
+  }
+}

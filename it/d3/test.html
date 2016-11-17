@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="tags" content="d3, visualization">
+    <title>d3 test</title>
+    <style media="screen">
+    body {
+      font: 10px sans-serif;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+    </style>
+    <script src="/js/d3/3.5.6/d3.js"></script>
+  </head>
+  <body>
+    <!--
+     the link for this pate is
+    -->
+    <div><p></p><p></p></div>
+    <div><p></p><p></p></div>
+
+
+    <script type="text/javascript">
+     var test1 = d3.selectAll('div') //[[div,div]]
+     var test2 = test1.selectAll('p');//[[p, p],[p, p]]
+
+     var fn = d3.time.format('%Y%w%W');//顺序不能换
+     var str = fn.parse('2016502');
+
+     // 20160101这一天是礼拜五
+     // 20160108这一天是礼拜五
+     var day = d3.time.fridayOfYear(new Date(2016,0,8));
+     console.log(day) // 1
+     var day1= d3.time.fridayOfYear(new Date(2016,0,2));
+     console.log(day1) // 1
+     var day2= d3.time.mondays(new Date(2016,0,5));
+     console.log('day2:' + day2) // 1
+
+     var day3 = d3.time.mondays(new Date(2016,0,5), new Date(2016,0,15),2);
+     console.log('day2:' + day3) // 1
+    </script>
+  </body>
+</html>
