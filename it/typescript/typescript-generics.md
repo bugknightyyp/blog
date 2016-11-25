@@ -12,6 +12,10 @@ function create<T>(c: {new(): T; }): T {
 一般的泛型，参数声明：`(c: T)`, 这时 *c* 是 *T* 的实例。
 使用泛型创建工厂，参数声明：`(c: {new(): T; })`,  这时 *c* 是 *T* 的引用（T类型的引用）。
 
+```typescript
+Greet: new() => Greet //表示 Greet构造器返回一个Greet实例 待测试
+```
+
 ## 参考
 
 [官网generics introduction][1]
