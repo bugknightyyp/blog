@@ -8,3 +8,5 @@ tags: [decorator]
 ## 参考
 
 [ES Decorators简介](http://efe.baidu.com/blog/introduction-to-es-decorator/)
+
+[Understanding Decorators](http://survivejs.com/react/appendices/understanding-decorators/)
