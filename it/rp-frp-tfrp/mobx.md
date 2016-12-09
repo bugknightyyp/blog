@@ -24,7 +24,4 @@ tags: [mobx] [react]
 *Actions* 的基本用户的就是修改 *state*。它不是用来响应 *state* 的变化，而是变化的来源，比如 用户事件，websocket 链接，改变可观察状态
 
 ## 参考
-[Becoming fully reactive: an in-depth explanation of MobX][1]
-
-
-[1]:https://medium.com/@mweststrate/becoming-fully-reactive-an-in-depth-explanation-of-mobservable-55995262a254#.bsh9h0hod "Becoming fully reactive: an in-depth explanation of MobX"
+[Mobx官网文档](https://mobxjs.github.io/mobx/index.html)
