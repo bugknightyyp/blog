@@ -4,7 +4,7 @@
 
 - 可观察对象 observable, 可以理解成数据。
 - 派生物 derivations, 可以理解成依赖数据成功的结果。
-- mobx的作用就是：当 observable 变化时，derivations 也能实时更新。
+- mobx的作用就是：当 observable 变化时，derivations 能够自动实时更新。
 
 ## mobx实现思路
 - observable怎样监听变化，从而触发derivations
