@@ -16,7 +16,8 @@ mobx在处理数据上，采用类似虚拟DOM的技术，在数据上添加一�
 mobx将数组转成 `ObservableArray`, `ObservableArray` 有一个重要的隐藏属性 `$mobx`,
 `$mobx` 是一个 `ObservableArrayAdministration` 对象。
 
-ObservableArray
+`ObservableArray` 做了2项工作：
+1.	重写了 Array.prototype 上的方法，是的方法
 
 
 
@@ -30,7 +31,19 @@ ObservableArray
 
 ### 几个工具类函数
 
-`runReactions`: 遍历 `globalState.pendingReactions` 里所有的 derivation 对象执行 `runReaction`
+`runReactions`: 遍历 `globalState.pendingReactions` 里所有的 derivation 对象执行 `runReaction`, 也就是执行 derivation
+
+`reportObserved`:
+
+`reportChanged`:
+
+`startBatch`:
+
+`endBatch`:
+
+`transactionStart`:
+
+`transactionEnd`: 
 
 
 ## mobx实现细节
