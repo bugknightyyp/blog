@@ -13,21 +13,19 @@ mobx在处理数据上，采用类似虚拟DOM的技术，在数据上添加一�
 ### 数据加工 （使得普通数据变成可观察对象-observable）
 
 - Array
-mobx将数组转成 `ObservableArray`, `ObservableArray` 有一个重要的隐藏属性 `$mobx`,
-`$mobx` 是一个 `ObservableArrayAdministration` 对象。
-
-`ObservableArray` 做了2项工作：
-1.	重写了 Array.prototype 上的方法，是的方法
-
-
-
+mobx将数组转成 `ObservableArray`, 它重写了 `Array.prototype` 上的方法, 使得所有的操作全部在它的属性`$mobx`上完成。
+`$mobx` 是一个 `ObservableArrayAdministration` 对象。`ObservableArrayAdministration` 负责完成对虚拟数据的操作，及通知依赖修改的 deviation。
 
 - Object
-	ObservableObjectAdministration
+mobx只是在Object上添加属性`$mobx`，该`$mobx` 是一个 `ObservableObjectAdministration` 对象
 - Primitives
 	ObservableValue
 ### 方法加工（使得普通方法变成派生物-derivation）
 
+### 几个重要的类及其职责：
+1. `BaseAtom`:
+`ObservableArrayAdministration` 通过 `this.atom.reportObserved();` 来通知操作
+`ObservableValue` 通过 `this.atom.reportObserved();` 来通知操作
 
 ### 几个工具类函数
 
@@ -37,13 +35,109 @@ mobx将数组转成 `ObservableArray`, `ObservableArray` 有一个重要的隐�
 
 `reportChanged`:
 
+
 `startBatch`:
 
 `endBatch`:
+```javascript
+function startBatch() {
+    globalState.inBatch++;
+}
+function endBatch() {
+    if (globalState.inBatch === 1) {
+        var list = globalState.pendingUnobservations;
+        for (var i = 0; i < list.length; i++) {
+            var observable_1 = list[i];
+            observable_1.isPendingUnobservation = false;// 挂起不被依赖
+            if (observable_1.observers.length === 0) {// 如果 observable 没有 observer 依赖，则触发onBecomeUnobserved事件
+                observable_1.onBecomeUnobserved();
+            }
+        }
+        globalState.pendingUnobservations = [];
+    }
+    globalState.inBatch--;
+}
+```
 
 `transactionStart`:
 
-`transactionEnd`: 
+`transactionEnd`:
+```javascript
+function transaction(action, thisArg, report) {
+    if (thisArg === void 0) { thisArg = undefined; }
+    if (report === void 0) { report = true; }
+    transactionStart((action.name) || "anonymous transaction", thisArg, report);
+    try {
+        return action.call(thisArg);
+    }
+    finally {
+        transactionEnd(report);
+    }
+}
+exports.transaction = transaction;
+function transactionStart(name, thisArg, report) {// 开始事务
+    if (thisArg === void 0) { thisArg = undefined; }
+    if (report === void 0) { report = true; }
+    startBatch();
+    globalState.inTransaction += 1;
+    if (report && isSpyEnabled()) {
+        spyReportStart({
+            type: "transaction",
+            target: thisArg,
+            name: name
+        });
+    }
+}
+function transactionEnd(report) {
+    if (report === void 0) { report = true; }
+    if (--globalState.inTransaction === 0) {
+        runReactions();
+    }
+    if (report && isSpyEnabled())
+        spyReportEnd();
+    endBatch();
+}
+```
 
+`allowStateChangesStart`:
+
+`allowStateChangesEnd`:
+```javascript
+function allowStateChanges(allowStateChanges, func) {
+    var prev = allowStateChangesStart(allowStateChanges);
+    var res = func();
+    allowStateChangesEnd(prev);
+    return res;
+}
+function allowStateChangesStart(allowStateChanges) {
+    var prev = globalState.allowStateChanges;
+    globalState.allowStateChanges = allowStateChanges;
+    return prev;
+}
+function allowStateChangesEnd(prev) {
+    globalState.allowStateChanges = prev;
+}
+```
+
+`untrackedStart`:
+
+`untrackedEnd`:
+```javascript
+function untracked(action) {
+    var prev = untrackedStart();
+    var res = action();
+    untrackedEnd(prev);
+    return res;
+}
+exports.untracked = untracked;
+function untrackedStart() {
+    var prev = globalState.trackingDerivation;
+    globalState.trackingDerivation = null;
+    return prev;
+}
+function untrackedEnd(prev) {
+    globalState.trackingDerivation = prev;
+}
+```
 
 ## mobx实现细节
