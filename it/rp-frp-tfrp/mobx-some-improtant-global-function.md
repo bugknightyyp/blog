@@ -4,6 +4,21 @@
 
 ## 处理依赖关系
 `reportObserved(observable)`: 负责收集 derivation 所依赖的 observable 读取数据的操作
+```javascript
+function reportObserved(observable) { //通知 正在追踪的 derivation，让其更新它依赖的observable
+    var derivation = globalState.trackingDerivation;
+    if (derivation !== null) {
+        if (derivation.runId !== observable.lastAccessedBy) {//保证 derivation 每次执行 对同一个 observable 只依赖一次
+            observable.lastAccessedBy = derivation.runId;
+            derivation.newObserving[derivation.unboundDepsCount++] = observable;
+        }
+    }
+    else if (observable.observers.length === 0) {
+        queueForUnobservation(observable);
+    }
+}
+```
+
 `propagateChanged(observable)`: 负责收集 derivation 所依赖的 observable 修改数据的操作
 ```javascript
 function propagateChanged(observable) {//当 observable 发生变化时，将依赖它的 deviation 的状态改成 STALE
