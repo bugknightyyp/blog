@@ -1,7 +1,6 @@
 # mobx几个重要的全局状态
 
 
-
 ## 处理依赖关系
 `reportObserved(observable)`: 负责收集 derivation 所依赖的 observable 读取数据的操作
 ```javascript

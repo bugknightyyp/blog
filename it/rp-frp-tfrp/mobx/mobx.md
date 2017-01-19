@@ -2,6 +2,8 @@
 date: [2016-11-10]
 tags: [mobx] [react]
 
+基于mobx3.0分析
+
 ## 基本概念
 
 - 可观察对象(Observable state)
