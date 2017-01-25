@@ -16,6 +16,21 @@ function create<T>(c: {new(): T; }): T {
 Greet: new() => Greet //表示 Greet构造器返回一个Greet实例 待测试
 ```
 
+## extends 还可以这样用
+
+```javascript
+interface GenericIdentityFn {
+    <A, R, T extends (a: A) => R>(arg: T): T;
+}
+
+function identity<A, T>(arg: T): T {
+    return arg;
+}
+
+let myIdentity: GenericIdentityFn = identity;
+```
+
+
 ## 参考
 
 [官网generics introduction][1]
