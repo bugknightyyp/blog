@@ -1,8 +1,8 @@
 # mobx源码阅读
-  
+
 ## 概述
 - 可观察对象 observable, 可以理解成数据源。它是由普通数据经过mobx处理而成对象
-- 派生物 derivation, 可以理解成可执行方法。它是有普通方法经过mobx处理而成的对象
+- 派生物 derivation, 可以理解成可执行方法。它是有普通方法经过mobx处理而成的方法
 - mobx的作用就是：当 observable 变化时，derivations 能够自动执行，产生你想要的东西
 
 ## mobx实现思路
