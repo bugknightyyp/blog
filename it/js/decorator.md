@@ -9,4 +9,8 @@ tags: [decorator]
 
 [ES Decorators简介](http://efe.baidu.com/blog/introduction-to-es-decorator/)
 
-[Understanding Decorators](http://survivejs.com/react/appendices/understanding-decorators/)
+[ECMAScript 6 入门 修饰器](http://es6.ruanyifeng.com/#docs/decorator)
+
+[wycats/javascript-decorators][https://github.com/wycats/javascript-decorators/blob/master/README.md]
+
+[tc39/proposal-decorators][https://github.com/tc39/proposal-decorators]
