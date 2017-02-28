@@ -8,16 +8,46 @@ mobx所实现的目标就是：被mobx处理后的数据和方法能够实现，
 
 接下来就从数据和方法2方面出发讲解它背后实现的原理。
 
+**声明**: 在本文档中，被mobx处理后的数据称为 `observable`， 被 mobx 处理后的方法称为 `derivation`, 这2者都是对象
+
 ## 数据
-在 mobx 里，被处理后的数据叫 `observable`(可观察对象)，下面看看它对数据是怎么处理的，以及处理后的样子。
+
+`Atom` 有2个重要的方法：
+
+- `reportObserved` 负责告知 derivation 依赖该 observable。
+- `reportChanged` 负责告知 依赖自己的derivation,自己的值变动了。
+
+
+
 
 既然是数据，就会涉及到种类，mobx 能接受的数据类型也都是 js 里数据类型。分别是：
 
-不同数据类型处理的共性：处理后的结果都是对象。
-
 - **primitives** 基本类型
 
-- **references** 引用类型
+ 该种数据类型 由`ObservableValue`类负责处理，它继承 `Atom`。
+
+
+```javascript
+
+var cityName = mobx.observable("Vienna");
+/*
+cityName的数据结构：
+{
+  value: "Vienna",
+  __proto__: {
+    get: function(){
+      this.reportObserved();
+      ...
+    },
+    set: function(v){
+      ...
+      this.reportChanged();
+    }
+  }
+  ...
+}
+*/
+```
 
 - **plain objects** 普通对象
 
@@ -27,10 +57,18 @@ mobx所实现的目标就是：被mobx处理后的数据和方法能够实现，
 
 - **maps** 映射
 
+- **references** 引用类型
 
 
 ## 方法
 在 mobx 里，被处理后的方法叫 `derivation`(推导对象)
+
+
+## 数据驱动方法自动执行
+
+
+
+
 
 
 
