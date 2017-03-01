@@ -29,15 +29,16 @@ mobx所实现的目标就是：被mobx处理后的数据和方法能够实现，
 
 ```javascript
 
-var cityName = mobx.observable("Vienna");
+var cityName = mobx.observable("sz");
 /*
 cityName的数据结构：
+ObservableValue<T> extends BaseAtom implements IObservableValue<T>, IInterceptable<IValueWillChange<T>>, IListenable
 {
-  value: "Vienna",
+  value: "sz",
   __proto__: {
     get: function(){
       this.reportObserved();
-      ...
+      return this.value;
     },
     set: function(v){
       ...
@@ -51,10 +52,64 @@ cityName的数据结构：
 
 - **plain objects** 普通对象
 
+该种数据类型 由`ObservableObject`类负责处理。
+
+```javascript
+var person = mobx.observable({
+    nickname: "yyp"
+})
+/*
+person数据结构：
+ObservableObjectAdministration implements IInterceptable<IObjectWillChange>, IListenable
+{
+  [[$mobx]]: ObservableObjectAdministration
+    values: Object
+      nickname: ObservableValue
+        value: "yyp"
+        __proto__: BaseAtom
+          get: ()
+          set: ()
+  nickname: () // invoke property getter
+  [[get nickname]]:(){
+    return this.$mobx.values[propName].get();
+  }
+  [[set nickname]]:(v){
+    this.reportChanged();
+  }
+}
+*/
+
+
+```
+
 - **class instances** 类实例
 
 - **arrays** 数组
+该种数据类型 由`ObservableArray`类负责处理。它重写了 `Array.prototype` 上的方法, 使得所有的操作的作用域为`this.$mobx.values`。
+感觉 ObservableArray 只是一个代理，真正的操作全在ObservableArrayAdministration实现
 
+```javascript
+var todos = mobx.observable([
+    { title: "Spoil tea", completed: true }
+]);
+/*
+person数据结构：
+ObservableArrayAdministration<T> implements IInterceptable<IArrayWillChange<T> | IArrayWillSplice<T>>, IListenable
+ObservableArray<T> extends StubArray
+ObservableArray
+  0: () // invoke property getter
+  [[$mobx]]: ObservableArrayAdministration
+    array: ObservableArray
+    atom: BaseAtom
+    values: Array
+      0: Object
+        [[$mobx]]: ObservableObjectAdministration
+          target: Object
+          values: Object
+            completed: ObservableValue
+            title: ObservableValue
+*/
+```
 - **maps** 映射
 
 - **references** 引用类型
