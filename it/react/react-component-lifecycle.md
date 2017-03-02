@@ -43,6 +43,21 @@ componentWillUpdate: function(
 
 ### `props changes`的触发流程
 
+**Mounting 触发顺序**
+- constructor()
+- componentWillMount()
+- render()
+- componentDidMount()
+
+nest mode:
+- Parent componentWillMount
+- Parent render
+- Child componentWillMount
+- Child render
+- Child componentDidMount
+- Parent componentDidMount
+
+**updating 触发顺序**
 - updating props
 - componentWillReceiveProps
 - shouldComponentaUpdate
@@ -50,6 +65,8 @@ componentWillUpdate: function(
 - render
 - componentDidUpdate
 
+**Unmounting 触发流程**
+- componentWillUnmount()
 
 ## 参考
 [Component Specs and Lifecycle][2]

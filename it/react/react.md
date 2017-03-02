@@ -2,36 +2,7 @@
 date: [9]
 tags: [react]
 
-## JSX
-- JSX里 inline style 写法
-React [组件样式][2]是一个对象，所以第一重大括号表示这是 JavaScript 语法，第二重大括号表示样式对象。
 
-```JSX
-render: function () {
-    return (
-      <div style={{opacity: this.state.opacity}}>
-        Hello {this.props.name}
-      </div>
-    );
-  }
-```
-
-
-- 注释
-
-```JSX
-var content = (
-  <Nav>
-    {/* 一般注释, 用 {} 包围 */}
-    <Person
-      /*
-      多行注释
-      */
-      name={window.isLoggedIn ? window.name : ''} // 行尾注释
-    />
-  </Nav>
-);
-```
 
 ## setState()
 `setState()` 将总是触发一次重绘, 除非在 shouldComponentUpdate() 中实现了条件渲染逻辑。
@@ -39,7 +10,7 @@ var content = (
  setState API expects an object literal and will merge it (Object.assign) with the previous state.
  [here](https://github.com/facebook/immutable-js/wiki/Immutable-as-React-state)
 
- 1. 在react可感知的方法里使用 setState，state不会立即改变，而是当setState语句所在函数返回后state才改变，所谓的batchedUpdate。
+ 1. 在react可感知的方法里使用 setState，state不会立即改变，而是当setState语句所在函数返回后state才改变，所谓的batchedUpdate。[异步demo][7]
  2. 在react不可感知的方法里使用setState，setState执行完后state已经改变，这时setState是同步的。
 
 比如通过addEventListener添加的事件，Ajax调用的回调函数，setTimeout的执行函数，这些函数的执行是 react 框架不可感知的。
@@ -124,3 +95,4 @@ from [here](https://facebook.github.io/react/blog/2015/03/03/react-v0.13-rc2.htm
 [4]:http://rongl.github.io/blog/docs/reactjs.html "菜鸟中的牛叉-React(基础篇)"
 [5]:https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding
 [6]:http://www.ian-thomas.net/autobinding-react-and-es6-classes/
+[7]:https://medium.com/@mweststrate/3-reasons-why-i-stopped-using-react-setstate-ab73fc67a42e#.k5516ly2e "这儿有个证明setState()是异步的例子"
