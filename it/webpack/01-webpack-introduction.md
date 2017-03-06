@@ -12,10 +12,10 @@ webpack 一个前端静态文件打包工具。
 默认使用npm管理loader，当然也可以把它当成文件使用。
 - `plugin`:
 - `module`: 可以简单理解为源码里的单个文件。
-- `chunk`: 字面意思是块，WebPack defines each module of your code as a "chunk".  不是入口文件的bundle也可称作chunk。
+- `chunk`: 字面意思是块，WebPack defines each module of your code as a "chunk". 翻译：webpack 把你写的module都定义成chunk, 不是入口文件的bundle也可称作chunk。
 - `bundle`: 表示最终合成的文件, 入口文件 entry point。
 - `output.filename vs output.chunkFilename` filename是主入口的文件名, chunkFilename是非主入口的文件名, 出自[这里][7]
-
+http://www.cnblogs.com/ihardcoder/p/5623411.html
 ## 模块规范
 - ES6 模块
 
