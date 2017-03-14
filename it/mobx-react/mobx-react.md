@@ -1,5 +1,9 @@
 # mobx-react
 
+## Observer -- Observer(function render() => {})
+
+- 对于无状态函数包装成 react component constructor
+- 使得 props 和 state 可以 observable, 当props 或者state 也发生变化是，也会执行render方法，需要注意的是：对比变化使用的是shallow compare方案（PureRenderMixin的方案）
 
 ## 关于 shouldComponentUpdate
 通常是可以设置shouldComponentUpdate，但是你完全可以不用设置，因为Mobx-react已经设置了默认的shouldComponentUpdate，它是基于PureRenderMixin实现的。如果有提供shouldComponentUpdate的话，当 props 和 state 变化时，会调用它。但是如果是 被render方法直接使用的observable 发生变化时，component 将会不调用shouldComponent ，而重新渲染(使用的是forceUpdate)。
@@ -10,4 +14,6 @@ Provider作为一个组件，能够借助React的 context 机制把store和其�
 
 inject 常常用来选择某些store. 它作为高阶组件，能够接受字符串列表-storeNames，使得对应的stores能够在被包裹过的components中使用
 
-1:https://github.com/mobxjs/mobx-react "github 官网"
+## 参考
+
+[1]:https://github.com/mobxjs/mobx-react "github 官网"
