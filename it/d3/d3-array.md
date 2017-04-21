@@ -38,6 +38,13 @@ tags: [d3] [array] [quantile]
 
 [无偏是指的样本均值的期望][25]
 
+标准差(Standard Deviation)是方差的算术平方根
+
+期望：随机变量的期望是以概率为权重的加和。
+
+平均值：是认为各个随机变量的概率都是相等的（等权的），所以就是算术平均值的算法。
+
+由于我得到的样本有限，故认为随机变量的概率是等权的，所以用平均值估计期望。
 
 [0]:https://github.com/d3/d3-array 'd3-array官方文档'
 [1]:http://wenku.baidu.com/link?url=qQVpOqqLs6QB1X6BzopvwrqB2fy1lTnXCQ-2dm0U4VoIRp12hHooDNLzObzjfZHlYVuy9Zb7WoJhmjxvqchd6R_S-iLnGNRlk80WCAXA6oq "论四分位数的计算"
