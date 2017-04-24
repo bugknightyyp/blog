@@ -24,7 +24,20 @@ tags: [d3] [array] [quantile]
 
 `d3.variance` 计算数组中数字的方差(样本方差)
 
+d3的样本方差的算法使用的是[Welford’s method][]
+
 `d3.deviation` 计算数组中数字的标准差
+
+\begin{align}
+&(N-1)s_N^2 – (N-2)s_{N-1}^2 \\
+&= \sum_{i=1}^N (x_i-\bar{x}_N)^2-\sum_{i=1}^{N-1} (x_i-\bar{x}_{N-1})^2 \\
+&= (x_N-\bar{x}_N)^2 + \sum_{i=1}^{N-1}\left((x_i-\bar{x}_N)^2-(x_i-\bar{x}_{N-1})^2\right) \\
+&= (x_N-\bar{x}_N)^2 + \sum_{i=1}^{N-1}(x_i-\bar{x}_N + x_i-\bar{x}_{N-1})(\bar{x}_{N-1} – \bar{x}_{N}) \\
+&= (x_N-\bar{x}_N)^2 + (\bar{x}_N – x_N)(\bar{x}_{N-1} – \bar{x}_{N}) \\
+&= (x_N-\bar{x}_N)(x_N-\bar{x}_N – \bar{x}_{N-1} + \bar{x}_{N}) \\
+&= (x_N-\bar{x}_N)(x_N – \bar{x}_{N-1}) \\
+\end{align}
+
 
 ### 涉及的数学知识点-概率论和数理统计
 
@@ -46,18 +59,16 @@ tags: [d3] [array] [quantile]
 
 由于我得到的样本有限，故认为随机变量的概率是等权的，所以用平均值估计期望。
 
-[0]:https://github.com/d3/d3-array 'd3-array官方文档'
+[0]:https://github.com/d3/d3-array "d3-array官方文档"
+
 [1]:http://wenku.baidu.com/link?url=qQVpOqqLs6QB1X6BzopvwrqB2fy1lTnXCQ-2dm0U4VoIRp12hHooDNLzObzjfZHlYVuy9Zb7WoJhmjxvqchd6R_S-iLnGNRlk80WCAXA6oq "论四分位数的计算"
 
-
-[2]:http://signal.spitzland.com/2011/04/23/%E6%A0%B7%E6%9C%AC%E6%96%B9%E5%B7%AE%E4%B8%BA%E4%BD%95%E9%99%A4%E4%BB%A5n-1-%EF%BC%88%E5%8F%82%E8%80%83%E6%B5%99%E5%A4%A7%E5%9B%9B%E7%89%88%E3%80%8A%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0/ "样本方差为何除以n-1?"
 [21]:http://blog.csdn.net/feliciafay/article/details/5878036 "为什么样本方差要除以n-1"
 [22]:http://blog.sina.com.cn/s/blog_4bdb170b0101oddi.html "样本方差与总体方差的区别"
 [23]:http://open.163.com/movie/2011/6/6/N/M82IC6GQU_M83JA826N.html "统计：样本方差-网易公开课"
 [24]:https://www.zhihu.com/question/20099757/answer/27502526 "我来说个我们这种文科生都能看得懂的-知乎"
 [25]:https://www.zhihu.com/question/22983179 "什么是无偏估计-知乎"
-[26]:http://jonisalonen.com/2013/deriving-welfords-method-for-computing-variance/ "The Mindful Programmer
-Welford’s method for computing variance"
+[26]:http://jonisalonen.com/2013/deriving-welfords-method-for-computing-variance/ "The Mindful Programmer Welford’s method for computing variance"
 [27]:https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance "Algorithms for calculating variance-wikipedia"
 
 [3]:http://blog.csdn.net/popy007/article/category/208696 "向量几何在游戏编程中的使用"
