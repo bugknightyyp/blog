@@ -15,6 +15,7 @@ SVG
 TeX
 AMS
 
+会有一些扩展文件随配置文件一起加载，例如配置文件 TeX-AMS_CHTML 会加载下面几个插件(其他组件需要时也会被加载)：
 
 - TeX/AMSmath.js，它定义了`AMS`的数学环境和宏(macros)
 - TeX/AMSsymbols.js，它定要来 *msam10* 和 *msbm10* 系统字体的宏
