@@ -32,22 +32,24 @@ TeX输入处理器有扩展，它们和名字包含TeX的配置文件合并加�
 - TeX/noErrors.js，当处理Tex出现问题的时候，它显示Tex源码，而不是错误信息
 - TeX/noUndefined.js，它阻止未定义宏产生错误信息，而是以红色来显示宏的名字
 
-### MathML input (mml2jax)
 
-这个简单直接看官网文档
+## caveat
 
-### AsciiMath input (asciimath2jax)
-这个简单直接看官网文档
+- 大括号用来分组。
 
-
-## 配置
 
 
 ## 参考
 
 [1]:https://kerzol.github.io/markdown-mathjax/editor.html "online live editor for mathjax"
 
-[2]:http://blog.kamidox.com/write-math-formula-with-mathjax.html
+[2]:http://mlworks.cn/posts/introduction-to-mathjax-and-latex-expression/ "完美入门教程"
+
+[3]:http://detexify.kirelabs.org/classify.html "online identify writing"
+
+[4]:http://docs.mathjax.org/en/latest/tex.html#supported-latex-commands "mathjax supported-latex-commands"
+
+[5]:https://mirrors.tuna.tsinghua.edu.cn/CTAN/info/symbols/math/maths-symbols.pdf "math symbols pdf"
 
 https://liam0205.me/2015/09/09/fix-conflict-between-mathjax-and-markdown/
 
