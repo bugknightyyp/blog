@@ -9,4 +9,15 @@ Object.defineProperty(test, 'bar', {
 	}
 })
 test.bar = 2;
+
+//你可以这样写
+var test = {}
+Object.defineProperty(test, 'bar', {
+	set: function(v) {
+ 		this._bar = v //这里
+	}
+})
+test.bar = 2;
+
+
 ```

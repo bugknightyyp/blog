@@ -5,3 +5,5 @@
 
 
 [1]:http://gamedevelopment.tutsplus.com/series/how-to-create-a-custom-physics-engine--gamedev-12715
+[2]:http://brm.io/game-physics-for-beginners/
+[3]:http://subprotocol.com/system/introducing-verlet-js.html
