@@ -10,7 +10,7 @@ date: [2017-02-27]
 
 **buffered** code会执行，但是结果保存到 output buffer
 
-```jade
+```pug
 .unbuffered
   - 'unbuffered vs buffered'
 
@@ -22,6 +22,16 @@ date: [2017-02-27]
 <div class="unbuffered"></div>
 <div class="buffered">unbuffered vs buffered</div>
 ```
+## Variable declaration & valid context
+
+pug的变量声明如下：
+
+```pug
+- var varibleName = 'value'
+```
+只要是在在变量位置之后的地方都可以使用(通过extends/prepend/append处理后的模板位置)。也就是在变量所在位置后执行的代码都可以是用它.
+
+
 ## 参考
 
 [缓存code与非缓存code 区别][1]
