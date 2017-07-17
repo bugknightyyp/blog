@@ -13,6 +13,16 @@ stackeidt 基本上是各种开源模块的组装。代码组织使用 **require
 - latex: `mathjax`
 - 文件合并: `google-diff-match-patch-js`
 
+## 代码执行顺序
+
+利用jquery的ready事件执行初始化工作
+页面布局layout初始化，主要是界面初始化工作
+编辑器editor初始化
+执行eventMgr.onReady事件
+
+##实现思路
+
+根据h{1,2,3,4,5,6}标题标签来划分区域，h标签之间的内容为以一个section
 
 ## 参考
 
