@@ -9,7 +9,7 @@ Range是一种fragment（HTML片断），它包含了节点或文本节点的一
 - `setEndBefore(referenceNode)`
 - `setEndAfter(referenceNode)`
 
-一开始我以为是 *referenceNode* 后一个或者前一个 *node*, 其实不是。它是指 *referenceNode* 的点位置，
+一开始我以为是 *referenceNode* 后一个或者前一个 *node*, 其实不是。它是指 *referenceNode* 的点位置，指的是 *referenceNode* 前边那一点的位置。
 *before referenceNode* 其实就是 *referenceNode* 本身，*after referenceNode* 其实就是 *referenceNode* 的 *next Sibling node*。
 
 
