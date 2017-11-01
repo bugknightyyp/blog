@@ -4,29 +4,33 @@
 
 `git add .` #stages new and modified, without deleted
 
-`git add -u` #stages modified and deleted, without new
+`git add -u` #alias update。 stages modified and deleted, without new
 
 **`git add -A` is equivalent to `git add .; git add -u`**
 
 
 ##基础思想
 
-所有的`commit`,`branch`都只是保存变化量，所以不会有额外的开销。
+- 所有的`commit`,`branch`都只是保存变化量，所以不会有额外的开销。
+- **upstream & downstream**。可理解为 **上游&下游**，一般远程分支成为上游，本地分支成为下游。之所以有这样的概念而不直接使用分支名字，是因为使用上下游概念，分支可以不同名
+
 
 ##基础命令基本用法依次晋级
 
-`commit`:一次改动提交。
+`commit`: 一次改动提交。
 
-`branch`:创建分支。
+`branch`: 创建分支。
+    - `git branch --set-upstream local-branch-name origin/branch-name`: 将本地分支与远程分支建立联系。改命令是修改git的本地配置文件config。
+`checkout`: 切换分支。
 
-`checkout`:切换分支。
-
-`merge`:合并分支。会产生一次commit,这个commit结点产生分别指向这2个分支的引用。
+`merge`: 合并分支。会产生一次commit,这个commit结点产生分别指向这2个分支的引用。
 *如果合并的分支已经是其祖先结点，则git不做任何事情，只是将其指向要合并分子的尾结点*。
 
 `rebase`:合并分支。它会把自身与要rebase分支的不同结点（其实就是一次次的commit）复制并接在要rebase分支的尾结点。
 *如果合并的分支已经是其祖先结点，则git不做任何事情，只是将其指向要合并分子的尾结点*。
 
+`push`: 
+    - `git push --set-upstream origin remote-branch-name`: 本地新建分支后，在远程新建 *remote-branch-name* 命名的分支，本地分支代码推送至该远程分支，并建立联系/跟踪，
 
 ##关于HEAD
 
