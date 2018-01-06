@@ -16,6 +16,7 @@ tags: [webpack]
   * Array:
 - `output`: 配置打包结果，path定义了输出的文件夹，filename则定义了打包结果文件的名称，filename里面的[name]会由entry中的键（这里是entry1和entry2）替换。
 可以有多个*entry*,配置一个*output*。
+    * `chunkFilename`: 决定非入口模块的名字。
 
 - `resolve`: 定义了解析模块路径时的配置，常用的就是extensions，可以用来指定模块的后缀，这样在引入模块时就不需要写后缀了，会自动补全
 - `module`: 定义了对模块的处理逻辑，这里可以用loaders定义了一系列的加载器，以及一些正则。当需要加载的文件匹配test的正则时，就会调用后面的loader对文件进行处理，这正是webpack强大的原因。
