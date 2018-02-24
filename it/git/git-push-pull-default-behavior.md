@@ -12,3 +12,8 @@ push.default 有以下几个可选值：
 - `simple`： simple和upstream是相似的，只有一点不同，simple必须保证本地分支和它的远程
 - `upstream`：分支同名，否则会拒绝push操作。
 - `matching`： push所有本地和远程两端都存在的同名分支。
+
+
+git push -u origin localBranch:remoteBranchToBeCreated
+git push -u origin name_new_branch
+git push origin :<branchName>

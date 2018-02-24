@@ -32,4 +32,10 @@ Link 不会默认添加 “active” 类，你可以选择增加一个；如果�
 <Redirect from="/some/where/:id" to="/somewhere/else/2"/>
 ```
 
+## route render methods
+
+- component
+- render
+- children
+
 - history 历史对象
