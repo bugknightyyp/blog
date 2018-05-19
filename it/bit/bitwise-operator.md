@@ -41,4 +41,4 @@
 [3]: http://blog.csdn.net/morewindows/article/details/7354571 "位操作基础篇之位操作全面总结"
 [4]: https://blog.csdn.net/ojshilu/article/details/11179911 "
 只用位运算来实现整数的加减乘除四则运算"
-[5]:http://javascript.ruanyifeng.com/grammar/number.html "javascript标准参考课程-数值"
+
