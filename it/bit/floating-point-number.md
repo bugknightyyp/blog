@@ -10,9 +10,15 @@ js的
 
 `1 / 3 =2^0 / (2^0 + 2^1) =  `
 
-
+|精度|符号位|位指数位|尾数
+|---|---|---|---
+|float(32)|1|8|23
+|double(64)|1|11|52
 
 ## 参考
+[浮点型数据存储方式浅析][1]
+
+[javascript标准参考课程][2]
 
 [1]:http://2ality.com/2012/04/number-encoding.html "How numbers are encoded in JavaScript"
 [2]:https://www.w3schools.com/js/js_numbers.asp "JavaScript Numbers"
@@ -29,3 +35,5 @@ https://tanin.nanakorn.com/blogs/294
 http://www.exploringbinary.com/number-of-digits-required-for-round-trip-conversions/
 http://www.exploringbinary.com/7-bits-are-not-enough-for-2-digit-accuracy/
 https://dl.acm.org/citation.cfm?id=1311775
+[1]:https://blog.csdn.net/GeckoLovesKeyboard/article/details/71437329 "浮点型数据存储方式浅析"
+[2]:http://javascript.ruanyifeng.com/grammar/number.html "javascript标准参考课程-数值"
