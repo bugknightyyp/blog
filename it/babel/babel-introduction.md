@@ -25,5 +25,6 @@
 
 ## 参考
 
+[0]:https://www.jianshu.com/p/e9b94b2d52e2 "【JavaScript】深入理解Babel原理及其使用"
 [1]:http://www.ruanyifeng.com/blog/2016/01/babel.html "阮一峰-Babel 入门教程"
 [2]:https://segmentfault.com/a/1190000008159877 "Babel的使用"
