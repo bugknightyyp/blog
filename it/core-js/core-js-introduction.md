@@ -26,7 +26,7 @@
 - es: 属于ECMAScript标准的polyfill
 - features: 所有的polyfill
 - internals: 辅助功能模块
-- modules: 存放所有polyfill的实现
+- modules: 存放所有polyfill的基本实现, 其他规范目录调用的时候，再做微调
 - proposals: 所有stage 0 - 4的polyfill
 - stage: 
   - 0.js: stage 0 - 4的polyfill
@@ -36,6 +36,8 @@
   - 4.js: stage 4的polyfill
   - pre.js: pre + stage 0 - 4的polyfill
 - web: BOM或者DOM增加的polyfill
+
+
 
 #### package: core-js-pure
 
