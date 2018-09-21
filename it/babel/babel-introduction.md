@@ -22,8 +22,11 @@
         `exclude`: 排除哪些文件
         `useBuiltIns`: 是否对 babel-polyfill 进行分解，只引入所需的部分。可以根据之前的配置自行添加 polyfill，默认不开启。安装 babel-polyfill 后只要引入一次就行：
 
+## `@babel/runtime` vs `runtime-corejs2`
 
+## `@babel/plugin-transform-runtime` vs `@babel/runtime`
 
+- 前者一般使用在开发环境，后者一般
 
 ## 参考
 
