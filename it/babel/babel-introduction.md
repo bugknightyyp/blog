@@ -1,5 +1,36 @@
 # babel简介
 
+`babel-cli`:
+`babel-code-frame`:
+`babel-core`:
+`babel-generator`:
+`babel-helper-x`:
+`babel-helpers`:
+`babel-hightlight`:
+`babel-node`:
+`babel-parser`:
+`babel-plugin-external-helpers`:
+`babel-plugin-proposal-x`:
+`babel-plugin-syntax-x`:
+`babel-plugin-transform-x`:
+`babel-plugin-transform-runtime`:
+`babel-polyfill`:
+`babel-preset-env`:
+`babel-preset-env-standalone`:
+`babel-preset-flow`:
+`babel-preset-react`:
+`babel-preset-typescript`:
+`babel-register`:
+`babel-runtime`:
+`babel-runtime-corejs2`:
+`babel-standalone`:
+`babel-template`:
+`babel-traverse`:
+`babel-types`:
+`babylon`:
+
+
+
 `babel-polyfill`: babel 只是会装换语法，而版本对一些对象添加的新 API ，babel 则无能为力。通过向全局对象和内置对象的prototype上添加方法来实现，比如运行环境中不支持Array-prototype.find，引入polyfill，前端就可以放心的在代码里用es6的语法来写；但是这样会造成全局空间污染。比如像Array-prototype.find就不存在了，还会引起版本之前的冲突。不过即便是引入babel-polyfill，也不能全用，代码量比较大
 `babel-register`:模块改写require命令，为它加上一个钩子。此后，每当使用require加载.js、.jsx、.es和.es6后缀名的文件，就会先用Babel进行转码。
 `babel-core `: babel-core 的作用是把 js 代码分析成 ast ，方便各个插件分析语法进行相应的处理。有些新语法在低版本 js 中是不存在的，如箭头函数，rest 参数，函数默认值等，这种语言层面的不兼容只能通过将代码转为 ast，分析其语法后再转为低版本 js。
@@ -61,8 +92,9 @@
     $node node_modules/jest/bin/jest.js "${jestArgs[@]}"
 ```
 
-跑某个package的测试用例的命令是：`node --inspect-brk node_modules/jest/bin/jest.js --runInBand "(packages|codemods)/.*babel-parser.*/test"
-`
+跑某个package的测试用例的命令是：
+`babel-parser`: `node --inspect-brk node_modules/jest/bin/jest.js --runInBand "(packages|codemods)/.*babel-parser.*/test"`
+`babel-helpers`: `node --inspect-brk node_modules/jest/bin/jest.js --runInBand "(packages|codemods)/.*babel-helpers.*/test"`
 
 ####  @babel/plugin-x 的测试用例
 
@@ -77,6 +109,26 @@ plugins的测试用例通常有2种。第一就是由babel自己生产 输入 �
 - 添加一个 `output.json` 文件，它包含了解释后的代码。为了方便，如果没有发现 `output.json` 文件，测试运行器将自动生成。
 
 ### 调试代码
+
+### babel-parser
+
+```js
+// babel-parser 默认选项
+var defaultOptions = {
+  sourceType: "script",
+  sourceFilename: undefined,
+  startLine: 1,
+  allowAwaitOutsideFunction: false,
+  allowReturnOutsideFunction: false,
+  allowImportExportEverywhere: false,
+  allowSuperOutsideMethod: false,
+  plugins: [],
+  strictMode: null,
+  ranges: false,
+  tokens: false
+}
+
+```
 
 继承链条：
 
@@ -95,6 +147,9 @@ plugins的测试用例通常有2种。第一就是由babel自己生产 输入 �
 1. 初始化以上实例
 2. Parser.parse() 入口函数开始解释
 3. 
+
+### babel-cli
+
 
 ## 参考
 
