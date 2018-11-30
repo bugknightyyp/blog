@@ -7,7 +7,7 @@ tags: [decorator]
 
 ## 参考
 
-[ES Decorators简介](http://efe.baidu.com/blog/introduction-to-es-decorator/)
+[ES7 Decorator 装饰者模式](http://taobaofed.org/blog/2015/11/16/es7-decorator/)
 
 [ECMAScript 6 入门 修饰器](http://es6.ruanyifeng.com/#docs/decorator)
 

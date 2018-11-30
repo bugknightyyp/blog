@@ -5,10 +5,68 @@
 
 每次dispatch, 所有的reducer会从新执行一遍，生成新的总store。
 
+## dispatch
+
+
+
+## middleware vs enhancer
+
+`middleware`和`enhancer` 处理模式类似洋葱模式，同样以下场景也是这种模式：
+
+- 函数嵌套调用的call stack
+- react 组件嵌套
+- express or koa 中间件
+- es6 的多个装饰一起使用场景
+
+`middleware` 关注的是 `createStore` 创建实例 `store` 以后的过程, reducer可以理解为最后一个执行的中间件
+`enhancer` 关注的是 `createStore` 创建实例 `store` 以前的过程
+
+`middleware`结构:
+
+```js
+store => next => action => {
+  console.log('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState())
+  return result
+}
+```
+
+`enhancer`结构:
+
+```js
+const round = number => Math.round(number * 100) / 100
+​
+const monitorReducerEnhancer = createStore => (
+  reducer,
+  initialState,
+  enhancer
+) => {
+  const monitoredReducer = (state, action) => {
+    const start = performance.now()
+    const newState = reducer(state, action)
+    const end = performance.now()
+    const diff = round(end - start)
+​
+    console.log('reducer process time:', diff)
+​
+    return newState
+  }
+​
+  return createStore(monitoredReducer, initialState, enhancer)
+}
+​
+export default monitorReducerEnhancer
+```
+
+`applyMiddleware`: 可以将多个`middleware`转成一个`enhancer`; 形式： `(store) => (next) => (action) { }`
+
+`compose`: 可以将多个`enhancer`转成一个`enhancer`; 形式：`(createStore) => ({reducer, initialState, enhancer}) => store`
+
 ## redux-thunk
 
 ```js
-export default function thunkMiddleware({ dispatch, getState }) {// 此时的dispatch是 (action) => dispatch(action) dispatch = f(g(h()))
+export default function thunkMiddleware({ dispatch, getState }) {// 此时的dispatch是 (action) => dispatch(action), dispatch = f(g(h()))
   return next => action => {
     if (typeof action === 'function') {
       return action(dispatch, getState);
@@ -21,17 +79,20 @@ export default function thunkMiddleware({ dispatch, getState }) {// 此时的dis
 
 ## applyMiddleware
 
+`applyMiddleware` 将中间件数组处理成enhancer: (reducer, preloadedState) => (createStore) => {}
+
 ```js
 // 定义一个代码组合的方法
 // 传入一些function作为参数，返回其链式调用的形态。例如，
 // compose(f, g, h) 最终返回 (...args) => f(g(h(...args)))
+//[x1, x2, x3, x4].reduce(f) = f(f(f(x1, x2), x3), x4)
 export default function compose(...funcs) {
   if (funcs.length === 0) {
     return arg => arg
   } else {
     const last = funcs[funcs.length - 1]
     const rest = funcs.slice(0, -1)
-    // 传进的args是： store.dispatch
+    // 传进的args是： store.dispatch: (action) => dispatch(action)
     return (...args) => rest.reduceRight((composed, f) => f(composed), last(...args)) //这一步加工： [f, g, h] => f(g(h()))  初始的dispatch最后执行
   }
 }
