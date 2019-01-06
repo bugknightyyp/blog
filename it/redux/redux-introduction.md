@@ -59,9 +59,9 @@ const monitorReducerEnhancer = createStore => (
 export default monitorReducerEnhancer
 ```
 
-`applyMiddleware`: 可以将多个`middleware`转成一个`enhancer`; 形式： `(store) => (next) => (action) { }`
+`applyMiddleware`: 可以将多个`middleware`转成一个`enhancer`; `middleware`形式： `(store) => (next) => (action) { }`
 
-`compose`: 可以将多个`enhancer`转成一个`enhancer`; 形式：`(createStore) => ({reducer, initialState, enhancer}) => store`
+`compose`: 可以将多个`enhancer`转成一个`enhancer`; `enhancer`形式：`(createStore) => ({reducer, initialState, enhancer}) => store`
 
 ## redux-thunk
 
