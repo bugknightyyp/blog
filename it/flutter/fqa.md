@@ -12,4 +12,4 @@
 
 [1]:https://stackoverflow.com/questions/50080860/what-are-keys-in-the-stateless-widgets-class?noredirect=1 "What are Keys in the Stateless widgets class?"
 [2]:https://stackoverflow.com/questions/52056035/flutter-myhomepagekey-key-this-title-superkey-key-pls-any-one-explain "flutter MyhomePage({Key key, this.title}) : super(key: key); pls any one explain clearly with example flutter"
-[3]:https://blog.csdn.net/u011272795/column/info/27607 "不错的flutter基本概念说明"
+[3]:https://www.didierboelens.com/2018/06/widget---state---context---inheritedwidget/ "不错的flutter基本概念说明"
