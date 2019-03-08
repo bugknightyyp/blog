@@ -32,7 +32,21 @@ store => next => action => {
 }
 ```
 
-`enhancer`结构:
+`Middleware`
+
+```typescript
+
+type MiddlewareAPI = { dispatch: Dispatch, getState: () => State }
+type Middleware = (api: MiddlewareAPI) => (next: Dispatch) => Dispatch
+
+```
+
+`StoreCreator`结构: `type StoreCreator = (reducer: Reducer, preloadedState: ?State) => Store`
+
+`enhancer`结构: `type StoreEnhancer = (next: StoreCreator) => StoreCreator`
+
+`enhancer 和 middlewear 异同`
+
 
 ```js
 const round = number => Math.round(number * 100) / 100
@@ -59,7 +73,11 @@ const monitorReducerEnhancer = createStore => (
 export default monitorReducerEnhancer
 ```
 
-`applyMiddleware`: 可以将多个`middleware`转成一个`enhancer`; `middleware`形式： `(store) => (next) => (action) { }`
+`root reducer function`
+`applyMiddleware`: 可以将多个`middleware`转成一个`enhancer`;
+`applyMiddleware`: 是唯一一个由`redux`提供的`enhancer`;
+
+`middleware`形式： `(store) => (next) => (action) { }`;
 
 `compose`: 可以将多个`enhancer`转成一个`enhancer`; `enhancer`形式：`(createStore) => ({reducer, initialState, enhancer}) => store`
 
