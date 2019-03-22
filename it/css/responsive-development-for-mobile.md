@@ -2,12 +2,35 @@
 date: [5]
 tags: [mobile] [responsive] [rem]
 
+
+
+
+window.visualViewport 获取可视窗口信息
+
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
 This means that the browser will (probably) render the width of the page at the width of its own screen.
 So if that screen is 320px wide, the browser window will be 320px wide, rather than way zoomed out and showing 960px
 (or whatever that device does by default, in lieu of a responsive meta tag). see [here][100]
+
+`<meta name="viewport" content="width=900, initial-scale=.8, user-scalable=no">`
+经过测试 width是对loyout viewport 宽度的设置，initial-scale是对visual viewport的设置
+
+visual viewport的宽高等于 屏幕的宽高乘以 scale
+loyout viewport的高等于 980 除以 屏幕的宽高比
+
+[web_viewports_explainer](https://github.com/bokand/bokand.github.io/blob/master/web_viewports_explainer.md)
+[visual viewport vs layout viewport](https://bokand.github.io/viewport/index.html)
+[visual-viewport](https://visual-viewport.glitch.me/)
+[WICG/visual-viewport](https://github.com/WICG/visual-viewport)
+[fixed-to-viewport](https://wicg.github.io/visual-viewport/examples/fixed-to-viewport.html)
+[dom-visualviewport](https://wicg.github.io/visual-viewport/#dom-visualviewport)
+[metaviewport](https://www.quirksmode.org/mobile/metaviewport/)
+[Visual_Viewport_API](https://developer.mozilla.org/en-US/docs/Web/API/Visual_Viewport_API)
+[不要再问我移动适配的问题了](https://segmentfault.com/a/1190000017784801)
+[响应式设计——layout viewport、visual viewport以及相关属性](https://www.jianshu.com/p/fb982ea8dce3)
+
 
 ## 参考
 [移动端高清、多屏适配方案][1]
