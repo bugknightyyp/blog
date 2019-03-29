@@ -1,24 +1,60 @@
 # 移动端响应式开发
+
 date: [5]
 tags: [mobile] [responsive] [rem]
 
+## 事出有因
 
+在pc时代，只有viewport的概念，即视窗口，也就是浏览器看得见的区域，我们一般设置的网页宽度为980px。到了移动时代，手机屏幕变小了，原来pc端的网页在手机上查看缩小了。为什么会出现这种情形呢？为了用户体验考虑，用户不用左右滚动就可以浏览页面水平方向所有内容，下面讲解背后的实现原理。
 
+## viewport
 
+在移动时代，viewport变成了两个概念，即：可视窗口（visual viewport） 和 布局窗口（layout viewport）。布局视窗口和可视窗口的默认宽度是980px。布局视窗口就是网页布局的容器，可视窗口相当于一个矩形选框，它框选的区域会投射到屏幕上显示。效果类似淘宝产品详情页产品相册预览图片的效果。
+
+![效果图](../../assets/viewport.png)
+
+如上图，相册区域相当于布局视窗口，相册内的蓝色浮动框相当于可视窗口，右边的预览区相当于手机屏幕。
+
+以上就是布局视窗口、可视窗口、手机屏幕三者的联系，那么这者的比例关系及行为表现怎么控制呢？ 就是通过
+`<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">`。
+
+- width是对loyout viewport 宽度的设置，initial-scale是对visual viewport的设置
+- 啥都不设置 layout viewport 和 visual viewport 的宽度都等于 980
+- 只设置 width, layout viewport 和 visual viewport 的宽度都等于 width;
+- 只设置了 initial-scale，那么 layout viewport 和 visual viewport大小都等于屏幕大小/initial-scale;
+- 如果既设置了 width 又设置了 initial-scale，那么layout viewport 和 visual viewport都等于各自算出来的值。
+
+document.documentElement.clientWidt 可获取布局窗口的宽度
 window.visualViewport 获取可视窗口信息
 
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1">
+当然所以设置宽度的地方也可以设置高度，如不是设置高度，那么高度为宽度除以设备的宽高比，不过一般不需要关注高度。
+
+
+```js
+visualViewport = {
+    // 当该值变化时，触发scroll事件
+    double offsetLeft; // Relative to the layout viewport,
+    // 当该值变化时，触发scroll事件
+    double offsetTop; // and read-only.
+
+    double pageLeft;  // Relative to the document
+    double pageTop;  // and read-only.
+
+    //当该值变化时，触发resize事件
+    double width;  // Read-only and excludes the scrollbars
+    // 当该值变化时，触发resize事件
+    double height; // if present. These values give the number
+                    // of CSS pixels visible in the visual viewport.
+                    // i.e. they shrink as the user zooms in.
+
+    double scale;     // Read-only. The scaling factor applied to
+                      // the visual viewport relative to the `ideal
+                      // viewport` (size at width=device-width). This
+                      // is the same scale as used in the viewport
+                      // <meta> tag.
+}
 ```
-This means that the browser will (probably) render the width of the page at the width of its own screen.
-So if that screen is 320px wide, the browser window will be 320px wide, rather than way zoomed out and showing 960px
-(or whatever that device does by default, in lieu of a responsive meta tag). see [here][100]
 
-`<meta name="viewport" content="width=900, initial-scale=.8, user-scalable=no">`
-经过测试 width是对loyout viewport 宽度的设置，initial-scale是对visual viewport的设置
-
-visual viewport的宽高等于 屏幕的宽高乘以 scale
-loyout viewport的高等于 980 除以 屏幕的宽高比
 
 [web_viewports_explainer](https://github.com/bokand/bokand.github.io/blob/master/web_viewports_explainer.md)
 [visual viewport vs layout viewport](https://bokand.github.io/viewport/index.html)
