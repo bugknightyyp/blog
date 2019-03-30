@@ -1,4 +1,4 @@
-# 移动端响应式开发
+# viewport 介绍
 
 date: [5]
 tags: [mobile] [responsive] [rem]
@@ -11,12 +11,22 @@ tags: [mobile] [responsive] [rem]
 
 在移动时代，viewport变成了两个概念，即：可视窗口（visual viewport） 和 布局窗口（layout viewport）。布局视窗口和可视窗口的默认宽度是980px。布局视窗口就是网页布局的容器，可视窗口相当于一个矩形选框，它框选的区域会投射到屏幕上显示。效果类似淘宝产品详情页产品相册预览图片的效果。
 
-![效果图](../../assets/viewport.png)
+![效果图](./assets/viewport.png)
 
-如上图，相册区域相当于布局视窗口，相册内的蓝色浮动框相当于可视窗口，右边的预览区相当于手机屏幕。
+如上图，相册区域相当于布局视窗口，相册内的蓝色浮动框相当于可视窗口，右边的预览区相当于手机屏幕。滚动页面时，相当于移动可视窗口。
 
 以上就是布局视窗口、可视窗口、手机屏幕三者的联系，那么这者的比例关系及行为表现怎么控制呢？ 就是通过
-`<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">`。
+`<meta name="viewport" content="name=value,name=value">`。
+
+参数说明：
+
+- width: 对loyout viewport的宽度设置
+- initial-scale：设置 visual viewport 初始缩放比例及loyout viewport的宽度
+- minimum-scale: 设置 visual viewport 最小缩放水平
+- maximum-scale: 设置 visual viewport 最大缩放水平
+- user-scalable：允许或者禁止用户缩放页面
+
+不用情形，不同表现：
 
 - width是对loyout viewport 宽度的设置，initial-scale是对visual viewport的设置
 - 啥都不设置 layout viewport 和 visual viewport 的宽度都等于 980
@@ -24,11 +34,12 @@ tags: [mobile] [responsive] [rem]
 - 只设置了 initial-scale，那么 layout viewport 和 visual viewport大小都等于屏幕大小/initial-scale;
 - 如果既设置了 width 又设置了 initial-scale，那么layout viewport 和 visual viewport都等于各自算出来的值。
 
+tips: 当然所以设置宽度的地方也可以设置高度，如不是设置高度，那么高度为宽度除以设备的宽高比，不过一般不需要关注高度。
+
+## 查看viewport参数
+
 document.documentElement.clientWidt 可获取布局窗口的宽度
 window.visualViewport 获取可视窗口信息
-
-当然所以设置宽度的地方也可以设置高度，如不是设置高度，那么高度为宽度除以设备的宽高比，不过一般不需要关注高度。
-
 
 ```js
 visualViewport = {
