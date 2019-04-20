@@ -15,11 +15,12 @@
 
 - 函数嵌套调用的call stack
 - react 组件嵌套
+
 - express or koa 中间件
 - es6 的多个装饰一起使用场景
 
-`middleware` 关注的是 `createStore` 创建实例 `store` 以后的过程, reducer可以理解为最后一个执行的中间件
-`enhancer` 关注的是 `createStore` 创建实例 `store` 以前的过程
+`middleware` 关注的是 `createStore` 创建实例 `store` 以后的过程, rootReducer可以理解为最后一个执行的中间件
+`enhancer` 关注的是 `createStore` 创建实例 `store` 以前的过程, createStore可以理解为最后一个执行的enhancer
 
 `middleware`结构:
 
