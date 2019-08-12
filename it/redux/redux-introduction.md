@@ -1,5 +1,16 @@
 # redux 介绍
 
+redux是一个用于单页面应用，具有可预测性的状态容器
+
+## 怎么理解“可预测性”
+
+“可预测性”表示状态的改变是可预测的，因为什么时候更新和怎样更新都是可控的，这些都反应在redux的3大原则上。
+
+## 三大原则
+
+- 单一数据源
+- state是只读的，要想改变状态必须通过触发一个action(一个描述发生了什么的对象)。
+- 改变状态必须使用纯函数
 
 调用createStore，reducer会接受一个type为ActionTypes.INIT的action，使reducer返回他们默认的state，这样可以快速的形成默认的state的结构
 
@@ -7,20 +18,25 @@
 
 ## dispatch
 
-
-
 ## middleware vs enhancer
 
 `middleware`和`enhancer` 处理模式类似洋葱模式，同样以下场景也是这种模式：
 
-- 函数嵌套调用的call stack
-- react 组件嵌套
-
 - express or koa 中间件
 - es6 的多个装饰一起使用场景
 
+共性：
+
+- 函数嵌套调用的call stack
+- 每个函数的形参是一样的
+
 `middleware` 关注的是 `createStore` 创建实例 `store` 以后的过程, rootReducer可以理解为最后一个执行的中间件
 `enhancer` 关注的是 `createStore` 创建实例 `store` 以前的过程, createStore可以理解为最后一个执行的enhancer
+
+## compose 实现调用或者尾调用
+
+- 调用(递归)
+- 尾调用(尾递归)
 
 `middleware`结构:
 
@@ -72,6 +88,33 @@ const monitorReducerEnhancer = createStore => (
 }
 ​
 export default monitorReducerEnhancer
+
+
+
+export default function applyMiddleware(...middlewares) {
+  return createStore => (...args) => {
+    const store = createStore(...args)
+    let dispatch = () => {
+      throw new Error(
+        'Dispatching while constructing your middleware is not allowed. ' +
+          'Other middleware would not be applied to this dispatch.'
+      )
+    }
+
+    const middlewareAPI = {
+      getState: store.getState,
+      dispatch: (...args) => dispatch(...args)
+    }
+    const chain = middlewares.map(middleware => middleware(middlewareAPI))
+    dispatch = compose(...chain)(store.dispatch)
+
+    return {
+      ...store,
+      dispatch
+    }
+  }
+}
+
 ```
 
 `root reducer function`
@@ -147,3 +190,5 @@ export default function applyMiddleware(...middlewares) {
 ## 参考
 
 [1]:https://github.com/ecmadao/Coding-Guide/blob/master/Notes/React/Redux/Redux%E5%85%A5%E5%9D%91%E8%BF%9B%E9%98%B6-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md "Redux入坑进阶-源码解析.md'
+
+[2]:https://blog.csdn.net/d1105260363/article/details/81979292 "js作用域 作用域链 闭包"
