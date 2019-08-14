@@ -15,7 +15,7 @@ tags: [uml]
 
 方向：源指向对象
 
-class diagram symbol: <image src="/img/it/class-diagram-arrow.png">
+class diagram symbol: ![test](./assets/redux-1.jpg)
 
 ##依赖(dependency)
 
